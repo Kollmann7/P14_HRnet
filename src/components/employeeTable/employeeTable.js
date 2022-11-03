@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import {
   DataGrid,
@@ -33,8 +34,8 @@ const columns = [{ field:'id'}, { field:'firstName'}, { field:'lastName'}, { fie
   { field:'department'}, { field:'birth'}, { field:'street'}, { field:'city'}, { field:'state'}, { field:'zipCode'}];
 
 export default function QuickFilteringCustomizedGrid() {
-
   const [data, setData] = useState('')
+  
   useEffect(() => {
     axios.get('http://localhost:4000/employees').then(res =>  {
       setData(res.data)
@@ -46,7 +47,7 @@ export default function QuickFilteringCustomizedGrid() {
     <>
     {data &&
     <div id="employee-div" className="container">
-      <h1>Current Employees</h1>
+      <h1 className='title-current-employee'>Current Employees</h1>
       <div className='employee-table'>
       <Box sx={{ height: 400, width: 1 }}>
         <DataGrid
@@ -64,7 +65,7 @@ export default function QuickFilteringCustomizedGrid() {
         />
       </Box>
       </div>
-      <a href="/">Home</a>
+      <Link  className='link' to="/">Home</Link >
     </div>
     }
     </>
