@@ -1,5 +1,6 @@
 import './employeeForm.css'
 import React from 'react'
+import {Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { useForm, Controller} from 'react-hook-form'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -23,10 +24,11 @@ export default function EmployeeForm () {
       console.log("employee added", res)
     })
   }
+  
   return( 
     <>
-      <a href="/employee">View Current Employees</a>
-      <h2>Create Employee</h2>
+      <Link  className='link' to="/employee">View Current Employees</Link >
+      <h2 className='title-employee'>Create Employee</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='employee-info'>
           <label>First Name</label>
@@ -68,59 +70,63 @@ export default function EmployeeForm () {
           <label htmlFor="city">City</label>
           <input  {...register('city')} />
 
-          <label htmlFor="state">State</label>
-          <FormControl  sx={{ m: 1, width: 300 }}>
+          <div className='select-container'>
+            <label htmlFor="state">State</label>
+            <FormControl >
+              <Controller
+                control={control}
+                name="State"
+                inputRef={register()}
+                defaultValue={states[0].abbreviation}
+                render={({ field: { onChange, value } }) => (
+                  <Select
+                  defaultValue={states[0].name}
+                  value={value}
+                  onChange={onChange}
+                >
+                  {states.map((state) => (
+                  <MenuItem
+                    key={state.name}
+                    value={state.abbreviation}
+                  >
+                    {state.name}
+                  </MenuItem>
+                  ))}
+                  </Select>
+                )}
+              />
+            </FormControl>
+          </div>
+          <label htmlFor="zip-code">Zip Code</label>
+          <input {...register('zipCode')}/>
+        </fieldset>
+        <div className='select-container'>
+        <label className='department' htmlFor="department">Department</label>
+          <FormControl >
             <Controller
               control={control}
-              name="State"
+              name="department"
               inputRef={register()}
-              defaultValue={states[0].abbreviation}
+              defaultValue={departments[0].value}
               render={({ field: { onChange, value } }) => (
                 <Select
-                defaultValue={states[0].name}
+                defaultValue={departments[0].label}
                 value={value}
                 onChange={onChange}
               >
-                {states.map((state) => (
+                {departments.map((department) => (
                 <MenuItem
-                  key={state.name}
-                  value={state.abbreviation}
+                  key={department.label}
+                  value={department.value}
                 >
-                  {state.name}
+                  {department.label}
                 </MenuItem>
                 ))}
                 </Select>
               )}
             />
           </FormControl>
-          <label htmlFor="zip-code">Zip Code</label>
-          <input {...register('zipCode')}/>
-        </fieldset>
-        <label className='department' htmlFor="department">Department</label>
-        <FormControl  sx={{ m: 1, width: 300 }}>
-          <Controller
-            control={control}
-            name="department"
-            inputRef={register()}
-            defaultValue={departments[0].value}
-            render={({ field: { onChange, value } }) => (
-              <Select
-              defaultValue={departments[0].label}
-              value={value}
-              onChange={onChange}
-            >
-              {departments.map((department) => (
-              <MenuItem
-                key={department.label}
-                value={department.value}
-              >
-                {department.label}
-              </MenuItem>
-              ))}
-              </Select>
-            )}
-          />
-        </FormControl>
+        </div>
         <div className='button-container'>
           <button className='submit-button' >Save</button>
         </div>
