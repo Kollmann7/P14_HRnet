@@ -1,15 +1,14 @@
-import * as React from 'react';
-import {Link } from 'react-router-dom';
-import Box from '@mui/material/Box';
+import * as React from 'react'
+import { Link } from 'react-router-dom'
+import Box from '@mui/material/Box'
 import {
   DataGrid,
   GridToolbarQuickFilter,
   GridLinkOperator,
-} from '@mui/x-data-grid';
+} from '@mui/x-data-grid'
 import axios from 'axios'
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 import './employeeTable.css'
-
 
 function QuickSearchToolbar() {
   return (
@@ -28,46 +27,57 @@ function QuickSearchToolbar() {
         }
       />
     </Box>
-  );
+  )
 }
-const columns = [{ field:'id'}, { field:'firstName'}, { field:'lastName'}, { field:'startDate'},
-  { field:'department'}, { field:'birth'}, { field:'street'}, { field:'city'}, { field:'state'}, { field:'zipCode'}];
+const columns = [
+  { field: 'id' },
+  { field: 'firstName' },
+  { field: 'lastName' },
+  { field: 'startDate' },
+  { field: 'department' },
+  { field: 'birth' },
+  { field: 'street' },
+  { field: 'city' },
+  { field: 'state' },
+  { field: 'zipCode' },
+]
 
 export default function QuickFilteringCustomizedGrid() {
   const [data, setData] = useState('')
-  
+
   useEffect(() => {
-    axios.get('http://localhost:4000/employees').then(res =>  {
+    axios.get('http://localhost:4000/employees').then((res) => {
       setData(res.data)
     })
-  }, 
-  [])
+  }, [])
 
   return (
     <>
-    {data &&
-    <div id="employee-div" className="container">
-      <h1 className='title-current-employee'>Current Employees</h1>
-      <div className='employee-table'>
-      <Box sx={{ height: 400, width: 1 }}>
-        <DataGrid
-          rows={data}
-          columns={columns}
-          initialState={{
-            filter: {
-              filterModel: {
-                items: [],
-                quickFilterLogicOperator: GridLinkOperator.Or,
-              },
-            },
-          }}
-          components={{ Toolbar: QuickSearchToolbar }}
-        />
-      </Box>
-      </div>
-      <Link  className='link' to="/">Home</Link >
-    </div>
-    }
+      {data && (
+        <div id="employee-div" className="container">
+          <h1 className="title-current-employee">Current Employees</h1>
+          <div className="employee-table">
+            <Box sx={{ height: 400, width: 1 }}>
+              <DataGrid
+                rows={data}
+                columns={columns}
+                initialState={{
+                  filter: {
+                    filterModel: {
+                      items: [],
+                      quickFilterLogicOperator: GridLinkOperator.Or,
+                    },
+                  },
+                }}
+                components={{ Toolbar: QuickSearchToolbar }}
+              />
+            </Box>
+          </div>
+          <Link className="link" to="/">
+            Home
+          </Link>
+        </div>
+      )}
     </>
-  );
+  )
 }

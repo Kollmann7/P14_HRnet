@@ -1,8 +1,8 @@
-.title-current-employee{
+.title-current-employee {
   margin: 30px;
 }
-.employee-table{
+.employee-table {
   display: flex;
   align-items: center;
-  width:50%;
+  width: 50%;
 }
