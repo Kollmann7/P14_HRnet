@@ -1,3 +1,6 @@
+.title-current-employee{
+  margin: 30px;
+}
 .employee-table{
   display: flex;
   align-items: center;
