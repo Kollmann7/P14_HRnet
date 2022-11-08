@@ -1,5 +1,6 @@
 import './employeeForm.css'
 import React from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
 import { useForm, Controller } from 'react-hook-form'
@@ -10,11 +11,13 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker'
 import axios from 'axios'
 import { states, departments } from '../../utils/constants'
 import { FormControl, Select, MenuItem } from '@mui/material'
+import  {Modal}  from 'modal-sk-01'
 
 export default function EmployeeForm() {
   const { control, register, handleSubmit } = useForm()
   const [startDate, setStartDate] = React.useState(dayjs())
   const [birth, setBirth] = React.useState(dayjs())
+  const [isOpen, setIsOpen] = useState(false)
 
   const onSubmit = (employee) => {
     axios
@@ -129,8 +132,11 @@ export default function EmployeeForm() {
           </FormControl>
         </div>
         <div className="button-container">
-          <button className="submit-button">Save</button>
+          <button onClick={() => setIsOpen(true)} className="submit-button">Save</button>
         </div>
+        <Modal open={isOpen} onClose={() => setIsOpen(false)} >
+          Employee Created!
+        </Modal>
       </form>
     </>
   )
