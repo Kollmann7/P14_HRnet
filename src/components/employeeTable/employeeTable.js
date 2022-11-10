@@ -57,7 +57,7 @@ export default function QuickFilteringCustomizedGrid() {
         <div id="employee-div" className="container">
           <h1 className="title-current-employee">Current Employees</h1>
           <div className="employee-table">
-            <Box sx={{ height: 400, width: 1 }}>
+            <Box sx={{ height: 500, width: 1 }}>
               <DataGrid
                 rows={data}
                 columns={columns}
