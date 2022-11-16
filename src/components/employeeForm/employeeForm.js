@@ -12,6 +12,7 @@ import axios from 'axios'
 import { states, departments } from '../../utils/constants'
 import { FormControl, Select, MenuItem } from '@mui/material'
 import  {Modal}  from 'modal-sk-01'
+import { BASE_URL } from '../../api/api'
 
 export default function EmployeeForm() {
   const { control, register, handleSubmit } = useForm()
@@ -21,7 +22,7 @@ export default function EmployeeForm() {
 
   const onSubmit = (employee) => {
     axios
-      .post('http://localhost:4000/employees', { ...employee })
+      .post(`${BASE_URL}/employees`, { ...employee })
       .then((res) => {
         console.log('employee added', res)
       })

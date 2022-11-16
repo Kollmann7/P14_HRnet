@@ -244,3 +244,16 @@ export const departments = [
   { value: 'Human Resources', label: 'Human Resources' },
   { value: 'Legal', label: 'Legal' },
 ]
+
+export const columns = [
+  { field: 'id' },
+  { field: 'firstName' },
+  { field: 'lastName' },
+  { field: 'startDate' },
+  { field: 'department' },
+  { field: 'birth' },
+  { field: 'street' },
+  { field: 'city' },
+  { field: 'state' },
+  { field: 'zipCode' },
+]

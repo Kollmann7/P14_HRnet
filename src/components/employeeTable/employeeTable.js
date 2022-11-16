@@ -8,7 +8,9 @@ import {
 } from '@mui/x-data-grid'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import {columns} from '../../utils/constants'
 import './employeeTable.css'
+import { BASE_URL } from '../../api/api'
 
 function QuickSearchToolbar() {
   return (
@@ -29,24 +31,12 @@ function QuickSearchToolbar() {
     </Box>
   )
 }
-const columns = [
-  { field: 'id' },
-  { field: 'firstName' },
-  { field: 'lastName' },
-  { field: 'startDate' },
-  { field: 'department' },
-  { field: 'birth' },
-  { field: 'street' },
-  { field: 'city' },
-  { field: 'state' },
-  { field: 'zipCode' },
-]
 
 export default function QuickFilteringCustomizedGrid() {
   const [data, setData] = useState('')
 
   useEffect(() => {
-    axios.get('http://localhost:4000/employees').then((res) => {
+    axios.get(`${BASE_URL}/employees`).then((res) => {
       setData(res.data)
     })
   }, [])
