@@ -134,7 +134,7 @@ export default function EmployeeForm() {
         <div className="button-container">
           <button onClick={() => setIsOpen(true)} className="submit-button">Save</button>
         </div>
-        <Modal open={isOpen} onClose={() => setIsOpen(false)} >
+        <Modal open={isOpen} onClose={() => setIsOpen(false)} modalClassName='modal-container'>
           Employee Created!
         </Modal>
       </form>

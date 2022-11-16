@@ -51,3 +51,8 @@ label {
   display: flex;
   flex-direction: column;
 }
+.modal-container{
+  color: green;
+  width:300px;
+  border-radius: 4px;
+}
